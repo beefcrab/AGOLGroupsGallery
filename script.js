@@ -1,6 +1,5 @@
 portalURL = "https://wsldctdgweb.water.internal/portal/";
-
-function test(id){
+function populatePortal(id){
     // load the Portal and PortalQueryParams modules
     require(["esri/portal/Portal",
      "esri/portal/PortalGroup",
@@ -69,10 +68,12 @@ function test(id){
     });
 };
 
+
 $.getJSON( "gallerylist.json", function(json) {
   console.log(json);
   json.group.forEach(function(y){
     console.log(y.id);
-    test(y.id);
+    populatePortal(y.id);
+
   });
 });
