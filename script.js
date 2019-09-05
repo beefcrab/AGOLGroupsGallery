@@ -1,5 +1,6 @@
-portalURL = "https://wsldctdgweb.water.internal/portal/";
-function populatePortal(id){
+
+//portalURL = "https://www.arcgis.com";
+function populatePortal(id, purl){
     // load the Portal and PortalQueryParams modules
     require(["esri/portal/Portal",
      "esri/portal/PortalGroup",
@@ -8,8 +9,9 @@ function populatePortal(id){
 
       var portalParams = {
          // if AGOL, Setting authMode to immediate signs the user in once loaded
-         authMode : "immediate",
-         url : portalURL, //portal URL
+         authMode : "anonymous",
+         url : purl, //portal URL
+         authorizedCrossOriginDomains:["giswebdev", "localhost"]
        }
       portal = new Portal(portalParams);
 
@@ -43,7 +45,7 @@ function populatePortal(id){
               var thumbnail = item.thumbnailUrl;
               var snippet = item.snippet;
               var url = item.url;
-              console.log(title, groupName);
+              //console.log(title, groupName);
 
               //generate page cards
               var card = `
@@ -52,7 +54,7 @@ function populatePortal(id){
                     <div class="card-body">
                       <h5 class="card-title">${title}</h5>
                       <p class="card-text">${snippet}</p>
-                      <a href="${url}" target="_blank" class="btn btn-primary">link</a>
+                      <a href="${url}" target="_blank" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Link</a>
                     </div>
                   </div>
                 `;
@@ -70,10 +72,13 @@ function populatePortal(id){
 
 
 $.getJSON( "gallerylist.json", function(json) {
-  console.log(json);
+  //console.log(json);
+  //console.log(window.location.hostname);
+  // serverDetect(window.location.hostname);
+  // portal = "https://"+server+".water.internal/portal/"
   json.group.forEach(function(y){
-    console.log(y.id);
-    populatePortal(y.id);
+    //console.log(y.id);
+    populatePortal(y.id, json.portalUrl);
 
   });
 });
