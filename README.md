@@ -5,5 +5,5 @@ Quick prototype to:
 - populates these items into elements for a web page
 - configurable in config.json
 
-##Demo Link
+#Demo Link: 
 https://beefcrab.github.io/AGOLGroupsGallery/
